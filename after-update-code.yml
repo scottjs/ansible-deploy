@@ -1,5 +1,5 @@
 ---
-# file: roles/deploy/tasks/after-update-code.yml
+# file: after-update-code.yml
 
 - name: set up custom symlinks
   file: src="{{ item.src }}" dest="{{ item.dest }}" state=link
