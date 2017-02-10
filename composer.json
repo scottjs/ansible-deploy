@@ -1,0 +1,11 @@
+{
+	"name": "scottjs/ansible-deploy",
+	"description": "Common Ansible deployment tasks using Ansistrano",
+	"license": "MIT",
+	"authors": [
+		{
+			"name": "Scott Salisbury",
+			"email": "scottsalisbury@gmail.com"
+		}
+	]
+}
