@@ -12,6 +12,9 @@
     "url": "https://github.com/scottjs/ansible-deploy/issues"
   },
   "homepage": "https://github.com/scottjs/ansible-deploy#readme",
+  "scripts": {
+	"postinstall": "echo Please add \"setup-deploy\": \"setup-deploy-config\" to your package.json scripts block."
+  },
   "dependencies": {
     "chalk": "^1.1.3",
     "fs-extra": "^2.0.0",
