@@ -1,10 +1,11 @@
 #!/usr/bin/env node
 var chalk = require('chalk');
 var inquirer = require('inquirer');
-var fs = require("fs-extra");
+var fs = require('fs-extra');
+var path = require('path');
 
 var ansibleDest = './ansible';
-var setupFiles = __dirname + '/setup';
+var setupFiles = path.join(__dirname, '..', 'setup');
 
 var deployScriptSrc = setupFiles + '/ansible/deploy.yml';
 var deployScriptDest = './ansible/deploy.yml';
@@ -164,7 +165,7 @@ function projectPrompt(callback) {
 console.log('Setting up deployment scripts...');
 
 deploymentPrompt(function(arguments){
-	
+
 	if(!fs.existsSync(ansibleDest)) {
 		console.log(chalk.green('Creating ansible directory...'));
 		fs.mkdirSync(ansibleDest);
@@ -173,7 +174,7 @@ deploymentPrompt(function(arguments){
 	if(!fs.existsSync(deployScriptDest)) {
 		console.log(chalk.green('Creating deploy file...'));
 		fs.copySync(deployScriptSrc, deployScriptDest);
-		
+
 		var repo = arguments.repo;
 		var notify = arguments.notify;
 
@@ -188,7 +189,7 @@ deploymentPrompt(function(arguments){
 
 			fs.writeFile(deployScriptDest, result, 'utf8', function (err) {
 				if (err) return console.log(err);
-			});			
+			});
 		});
 	}
 	else {
@@ -210,11 +211,11 @@ deploymentPrompt(function(arguments){
 	else {
 		console.log(chalk.yellow('Ansible config file already exists...'));
 	}
-	
+
 	console.log('Setting up deployment environments...');
 
 	environmentPrompt(function(arguments){
-		
+
 		if(!fs.existsSync(ansibleDest + '/' + arguments.target)) {
 			console.log(chalk.green('Creating deployment environment config...'));
 			fs.copySync(setupFiles + '/ansible/inventory', ansibleDest + '/' + arguments.target);
@@ -243,7 +244,7 @@ deploymentPrompt(function(arguments){
 
 					fs.writeFile(ansibleDest + '/' + environment + '/inventory', result, 'utf8', function (err) {
 						if (err) return console.log(err);
-					});			
+					});
 				});
 
 				fs.readFile(ansibleDest + '/' + environment + '/group_vars/all.yml', 'utf8', function (err,data) {
@@ -257,7 +258,7 @@ deploymentPrompt(function(arguments){
 
 					fs.writeFile(ansibleDest + '/' + environment + '/group_vars/all.yml', result, 'utf8', function (err) {
 						if (err) return console.log(err);
-					});			
+					});
 				});
 
 				console.log('Finished setting up deployment environment.');
