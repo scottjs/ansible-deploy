@@ -1,0 +1,27 @@
+---
+- hosts: all
+  vars:
+    # Notifiy users of deployment
+    # notify_users: $NOTIFY_USERS$
+    # smtp_from_address: user@domain.com
+
+    # Anistrano config
+    ansistrano_allow_anonymous_stats: no
+    ansistrano_keep_releases: 3
+
+    # Repository config
+    ansistrano_deploy_via: git
+    ansistrano_git_repo: $REPOSITORY$
+
+    # Archive and transfer build files to server
+    # build_files:
+    #  - { target: "./vendor", archive: "vendor.tar.gz" }
+    #  - { target: "./public/wp", archive: "wp.tar.gz" }
+    #  - { target: "./public/assets", archive: "assets.tar.gz" }
+
+    # Deployment hooks
+    ansistrano_after_update_code_tasks_file: "../vendor/scottjs/ansible-deploy/after-update-code.yml"
+
+  roles:
+    - carlosbuenosvinos.ansistrano-deploy
+    - mail
