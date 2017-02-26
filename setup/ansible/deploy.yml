@@ -2,8 +2,8 @@
 - hosts: all
   vars:
     # Notifiy users of deployment
-    notify_users: $NOTIFY_USERS$
-    smtp_from_address: systems@ecommnet.co.uk
+    # notify_users: $NOTIFY_USERS$
+    # smtp_from_address: user@domain.com
 
     # Anistrano config
     ansistrano_allow_anonymous_stats: no
