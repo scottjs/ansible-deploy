@@ -13,7 +13,7 @@
   },
   "homepage": "https://github.com/scottjs/ansible-deploy#readme",
   "scripts": {
-	"postinstall": "echo Please add \"setup-deploy\": \"setup-deploy-config\" to your package.json scripts block."
+	"postinstall": "bin/postinstall.js"
   },
   "dependencies": {
     "chalk": "^1.1.3",
