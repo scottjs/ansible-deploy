@@ -1,6 +1,6 @@
 {
   "name": "ansible-deploy",
-  "version": "1.3.2",
+  "version": "1.3.3",
   "description": "",
   "repository": {
     "type": "git",
@@ -13,7 +13,7 @@
   },
   "homepage": "https://github.com/scottjs/ansible-deploy#readme",
   "scripts": {
-	"postinstall": "bin/postinstall.js"
+	"postinstall": "node bin/postinstall.js"
   },
   "dependencies": {
     "chalk": "^1.1.3",
