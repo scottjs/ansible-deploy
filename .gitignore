@@ -7,3 +7,5 @@
 Thumbs.db
 *.retry
 *.idea
+*.log
+node_modules

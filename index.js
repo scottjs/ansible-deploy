@@ -24,7 +24,7 @@ function deploymentPrompt(callback) {
 				name: 'repo',
 				type: 'input',
 				message: 'Project git repository:',
-				default: 'git@bitbucket.org:USERNAME/REPOSITORY.git',
+				default: 'git@bitbucket.org:username/repository.git',
 				validate: function( value ) {
 					if (value.length) {
 						return true;
