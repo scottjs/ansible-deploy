@@ -20,7 +20,7 @@
     #  - { target: "./public/assets", archive: "assets.tar.gz" }
 
     # Deployment hooks
-    ansistrano_after_update_code_tasks_file: "../vendor/scottjs/ansible-deploy/after-update-code.yml"
+    ansistrano_after_update_code_tasks_file: "../node_modules/ansible-deploy/after-update-code.yml"
 
   roles:
     - carlosbuenosvinos.ansistrano-deploy
