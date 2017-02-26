@@ -4,15 +4,19 @@ var inquirer = require('inquirer');
 var fs = require('fs-extra');
 var path = require('path');
 
+// Ansible directory
 var ansibleDest = './ansible';
 var setupFiles = path.join(__dirname, '..', 'setup');
 
+// Deploy script paths
 var deployScriptSrc = setupFiles + '/ansible/deploy.yml';
 var deployScriptDest = './ansible/deploy.yml';
 
+// Rollback script paths
 var rollbackScriptSrc = setupFiles + '/ansible/rollback.yml';
 var rollbackScriptDest = './ansible/rollback.yml';
 
+// Ansible config paths
 var ansibleCfgSrc = setupFiles + '/ansible.cfg';
 var ansibleCfgDest = './ansible.cfg';
 
