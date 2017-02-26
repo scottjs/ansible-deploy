@@ -1,0 +1,35 @@
+---
+# Deployment config
+ansistrano_deploy_to: "$DEPLOY_TO$"
+ansistrano_git_branch: "$DEPLOY_FROM$"
+
+# Custom project symlinks
+# custom_symlinks:
+#  - { src: "../../../../../production/shared/public/wp-content/uploads", dest: "{{ ansistrano_release_path.stdout }}/public/wp-content/uploads" }
+
+# Shared paths for non-versioned content
+# ansistrano_shared_paths:
+#  - public/wp-content/uploads
+#  - public/wp-content/cache
+#  - public/wp-content/w3tc-config
+#  - public/wp-content/wflogs
+
+# Environment config if using https://github.com/scottjs/wp-boilerplate
+# env_config_file: |
+#   APP_ENV=development
+#   APP_DOCROOT=/public
+#   APP_CORE=/wp
+#   APP_UPLOADS=/wp-content/uploads
+#   APP_DEBUG=false
+#   APP_WWW=false
+#   APP_SSL=false
+#
+#   DB_HOST=localhost
+#   DB_DATABASE=
+#   DB_USERNAME=
+#   DB_PASSWORD=
+
+# Deployment email notification settings
+# smtp_host: smtp.domain.com
+# smtp_username: username
+# smtp_password: password

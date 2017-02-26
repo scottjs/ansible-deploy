@@ -1,22 +1,20 @@
 ---
-# file: after-update-code.yml
-
-- name: set up custom symlinks
+- name: Set up custom symlinks
   file: src="{{ item.src }}" dest="{{ item.dest }}" state=link
   with_items: "{{ custom_symlinks | default([]) }}"
 
-- name: create build directory
+- name: Create build directory
   local_action: command mkdir -p ../build
 
-- name: tar build directories
+- name: Tar build directories
   local_action: command tar -zcf ../build/{{ item.archive }} -C ../ {{ item.target }}
   with_items: "{{ build_files | default([]) }}"
 
-- name: unarchive build directories on target server
+- name: Unarchive build directories on target server
   unarchive: src=../build/{{ item.archive }} dest="{{ ansistrano_release_path.stdout }}"
   with_items: "{{ build_files | default([]) }}"
 
-- name: copy configs
+- name: Copy configs
   copy:
     dest="{{ ansistrano_release_path.stdout }}/.env"
     content="{{ env_config_file }}"
