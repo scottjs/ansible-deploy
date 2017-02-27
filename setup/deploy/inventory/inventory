@@ -1,1 +1,2 @@
+[webservers]
 $HOST$ ansible_port=$PORT$ ansible_ssh_user=$USER$ ansible_ssh_private_key_file=$KEY$
