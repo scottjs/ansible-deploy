@@ -4,17 +4,26 @@ var inquirer = require('inquirer');
 var fs = require('fs-extra');
 var path = require('path');
 
-// Ansible directory
-var ansibleDest = './ansible';
+// Ansible directories
+var ansibleParent = './ansible';
+var ansibleDest = ansibleParent + '/deploy';
 var setupFiles = path.join(__dirname, '..', 'setup');
 
 // Deploy script paths
-var deployScriptSrc = setupFiles + '/ansible/deploy.yml';
-var deployScriptDest = './ansible/deploy.yml';
+var deployScriptSrc = setupFiles + '/deploy/deploy.yml';
+var deployScriptDest = ansibleDest + '/deploy.yml';
 
 // Rollback script paths
-var rollbackScriptSrc = setupFiles + '/ansible/rollback.yml';
-var rollbackScriptDest = './ansible/rollback.yml';
+var rollbackScriptSrc = setupFiles + '/deploy/rollback.yml';
+var rollbackScriptDest = ansibleDest + '/rollback.yml';
+
+// Deploy vars script paths
+var deployVarsDest = ansibleDest + '/vars';
+var deployVarsScriptSrc = setupFiles + '/deploy/vars/deploy_vars.yml';
+var deployVarsScriptDest = ansibleDest + '/vars/deploy_vars.yml';
+
+// Inventory paths
+var inventorySrc = setupFiles + '/deploy/inventory';
 
 // Ansible config paths
 var ansibleCfgSrc = setupFiles + '/ansible.cfg';
@@ -23,7 +32,7 @@ var ansibleCfgDest = './ansible.cfg';
 function deploymentPrompt(callback) {
 	var questions = [];
 
-	if(!fs.existsSync(deployScriptDest)) {
+	if(!fs.existsSync(deployVarsScriptDest)) {
 		questions.push(
 			{
 				name: 'repo',
@@ -170,19 +179,28 @@ console.log('Setting up deployment scripts...');
 
 deploymentPrompt(function(arguments){
 
+	if(!fs.existsSync(ansibleParent)) {
+		fs.mkdirSync(ansibleParent);
+	}
+
 	if(!fs.existsSync(ansibleDest)) {
-		console.log(chalk.green('Creating ansible directory...'));
+		console.log(chalk.green('Creating deploy directory...'));
 		fs.mkdirSync(ansibleDest);
 	}
 
-	if(!fs.existsSync(deployScriptDest)) {
-		console.log(chalk.green('Creating deploy file...'));
-		fs.copySync(deployScriptSrc, deployScriptDest);
+	if(!fs.existsSync(deployVarsDest)) {
+		console.log(chalk.green('Creating deploy vars directory...'));
+		fs.mkdirSync(deployVarsDest);
+	}
+
+	if(!fs.existsSync(deployVarsScriptDest)) {
+		console.log(chalk.green('Creating deploy vars file...'));
+		fs.copySync(deployVarsScriptSrc, deployVarsScriptDest);
 
 		var repo = arguments.repo;
 		var notify = arguments.notify;
 
-		fs.readFile(deployScriptDest, 'utf8', function (err,data) {
+		fs.readFile(deployVarsScriptDest, 'utf8', function (err,data) {
 			if (err) {
 				return console.log(err);
 			}
@@ -191,10 +209,18 @@ deploymentPrompt(function(arguments){
 				.replace(/\$REPOSITORY\$/g, repo)
 				.replace(/\$NOTIFY_USERS\$/g, notify);
 
-			fs.writeFile(deployScriptDest, result, 'utf8', function (err) {
+			fs.writeFile(deployVarsScriptDest, result, 'utf8', function (err) {
 				if (err) return console.log(err);
 			});
 		});
+	}
+	else {
+		console.log(chalk.yellow('Deploy vars file already exists...'));
+	}
+
+	if(!fs.existsSync(deployScriptDest)) {
+		console.log(chalk.green('Creating deploy file...'));
+		fs.copySync(deployScriptSrc, deployScriptDest);
 	}
 	else {
 		console.log(chalk.yellow('Deploy file already exists...'));
@@ -222,7 +248,7 @@ deploymentPrompt(function(arguments){
 
 		if(!fs.existsSync(ansibleDest + '/' + arguments.target)) {
 			console.log(chalk.green('Creating deployment environment config...'));
-			fs.copySync(setupFiles + '/ansible/inventory', ansibleDest + '/' + arguments.target);
+			fs.copySync(inventorySrc, ansibleDest + '/' + arguments.target);
 
 			var environment = arguments.target;
 
