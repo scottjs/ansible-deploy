@@ -5,7 +5,7 @@ var fs = require('fs-extra');
 var path = require('path');
 
 var src = path.join(__dirname, '..', 'setup');
-var dest = './ansible';
+var dest = '.';
 
 var files = [];
 var environment = [
@@ -24,7 +24,7 @@ inquirer.prompt(environment).then(function(args) {
 	files = [
 		{
 			src: '/deploy/inventory/inventory',
-			dest: '/deploy/' + args.environment + '/inventory',
+			dest: '/ansible/deploy/' + args.environment + '/inventory',
 			replacements: [
 				{
 					name: 'host',
@@ -54,7 +54,7 @@ inquirer.prompt(environment).then(function(args) {
 		},
 		{
 			src: '/deploy/vars/deploy_vars.yml',
-			dest: '/deploy/vars/deploy_vars.yml',
+			dest: '/ansible/deploy/vars/deploy_vars.yml',
 			replacements: [
 				{
 					name: 'repository',
@@ -66,7 +66,7 @@ inquirer.prompt(environment).then(function(args) {
 		},
 		{
 			src: '/deploy/inventory/group_vars/all.yml',
-			dest: '/deploy/' + args.environment + '/group_vars/all.yml',
+			dest: '/ansible/deploy/' + args.environment + '/group_vars/all.yml',
 			replacements: [
 				{
 					name: 'deploy_to',
@@ -84,12 +84,12 @@ inquirer.prompt(environment).then(function(args) {
 		},
 		{
 			src: '/deploy/deploy.yml',
-			dest: '/deploy/deploy.yml',
+			dest: '/ansible/deploy/deploy.yml',
 			replacements: []
 		},
 		{
 			src: '/deploy/rollback.yml',
-			dest: '/deploy/rollback.yml',
+			dest: '/ansible/deploy/rollback.yml',
 			replacements: []
 		},
 		{
