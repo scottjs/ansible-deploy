@@ -1,6 +1,6 @@
 ---
 # Notifiy users of deployment
-# notify_users: $NOTIFY_USERS$
+# notify_users: user@domain.com
 # smtp_from_address: user@domain.com
 
 # Anistrano config
