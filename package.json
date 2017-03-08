@@ -1,9 +1,10 @@
 {
   "name": "ansible-deploy",
-  "version": "1.7.0",
+  "version": "1.8.0",
   "description": "",
   "bin": {
-	"setup-deploy-script": "bin/setup.js"
+	"setup-deploy-script": "bin/setup.js",
+	"deploy-script": "bin/deploy.js"
   },
   "scripts": {
 	"postinstall": "node bin/postinstall.js"
