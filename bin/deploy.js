@@ -12,6 +12,9 @@ var args = process.argv.slice(2);
 var params = [];
 var total = 0;
 
+// Start script
+console.log('Setting up a deploy...');
+
 for(i in args) {
 	var item = args[i];
 
@@ -74,7 +77,8 @@ else {
 
 /**
  * Start the ansible deploy with given args
- * @param params
+ *
+ * @param params Parameters from command line and/or prompt
  */
 function setup(params) {
 
