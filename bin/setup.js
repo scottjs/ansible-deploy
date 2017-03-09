@@ -4,10 +4,17 @@ var inquirer = require('inquirer');
 var fs = require('fs-extra');
 var path = require('path');
 
+// Setup paths
 var src = path.join(__dirname, '..', 'setup');
 var dest = '.';
 
+// Store file data
 var files = [];
+
+// Start script
+console.log('Setting up deploy scripts...');
+
+// Environment questions
 var environment = [
 	{
 		name: 'environment',
@@ -17,8 +24,7 @@ var environment = [
 	}
 ];
 
-console.log('Setting up deploy scripts...');
-
+// Ask questions
 inquirer.prompt(environment).then(function(args) {
 
 	files = [
@@ -99,9 +105,15 @@ inquirer.prompt(environment).then(function(args) {
 		}
 	];
 
+	// Prompt questions for each file
 	filePrompt();
 });
 
+/**
+ * Loop through each file, asking questions and replacing text
+ *
+ * @param i File iterator
+ */
 function filePrompt(i) {
 	i = typeof i !== 'undefined' ? i : 0;
 
@@ -112,22 +124,34 @@ function filePrompt(i) {
 			replacements = files[i].replacements;
 		}
 
+		// Ask questions
 		inquirer.prompt(replacements).then(function(args) {
 			if(!fs.existsSync(dest + files[i].dest)) {
+
+				// Copy file into project
 				fs.copySync(src + files[i].src, dest + files[i].dest);
+
+				// Find/replace text in file
 				fileReplace(args, files[i]);
 
-				console.log(chalk.green('Finished setting up ' + files[i].dest.substring(1) + '.'));
+				console.log(chalk.green('Finished setting up ' + files[i].dest.substring(1)));
 			}
 			else {
-				console.log(chalk.yellow('File already exists ' + files[i].dest.substring(1) + '.'));
+				console.log(chalk.yellow('File already exists ' + files[i].dest.substring(1)));
 			}
 
+			// Next file
 			filePrompt(i + 1);
 		});
 	}
 }
 
+/**
+ * Take answers from questions and search/replace text in given file with the results
+ *
+ * @param args Answers from questions
+ * @param file File to replace
+ */
 function fileReplace(args, file) {
 	fs.readFile(dest + file.dest, 'utf8', function (err, data) {
 		if (err) {
@@ -137,13 +161,26 @@ function fileReplace(args, file) {
 		var result = data;
 		var replacements = Object.keys(args);
 
+		// Loop through each replacement
 		for(i in replacements) {
 			var replacement = replacements[i];
 			var regex = new RegExp('\\$' + replacement.toUpperCase() + '\\$', 'g');
 
-			result = result.replace(regex, args[replacement]);
+			var replace = args[replacement];
+
+			// Generate random passwords
+			if(replace == 'leave blank for random') {
+				replace = generator.generate({
+					length: 16,
+					numbers: true
+				});
+			}
+
+			// Replace placeholder with answers
+			result = result.replace(regex, replace);
 		}
 
+		// Write replacements to file
 		fs.writeFile(dest + file.dest, result, 'utf8', function (err) {
 			if (err) {
 				return console.log(err);
