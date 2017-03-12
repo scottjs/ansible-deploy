@@ -19,3 +19,4 @@
     dest="{{ ansistrano_release_path.stdout }}/.env"
     content="{{ env_config_file }}"
   no_log: true
+  when: env_config_file is defined
