@@ -5,7 +5,7 @@ var cp = require('child_process');
 var fs = require('fs');
 
 // Setup paths
-var dest = './ansible/deploy';
+var dest = './ansible-deploy';
 
 // Load in required parameters and optional assigned parameters
 var args = process.argv.slice(2);
@@ -91,8 +91,8 @@ function setup(params) {
 	// Ansible args to use
 	var deployArgs = [
 		'-i',
-		'ansible/deploy/' + params['arg0'] + '/inventory',
-		'ansible/deploy/deploy.yml'
+		'ansible-deploy/' + params['arg0'] + '/inventory',
+		'ansible-deploy/deploy.yml'
 	];
 
 	// If vault params are sent, pass it into the ansible args

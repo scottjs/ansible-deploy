@@ -1,5 +1,5 @@
 ---
 - name: Rollback last deployment
-  hosts: webservers
+  hosts: all
   roles:
     - carlosbuenosvinos.ansistrano-rollback

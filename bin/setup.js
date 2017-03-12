@@ -29,8 +29,8 @@ inquirer.prompt(environment).then(function(args) {
 
 	files = [
 		{
-			src: '/deploy/inventory/inventory',
-			dest: '/ansible/deploy/' + args.environment + '/inventory',
+			src: '/ansible-deploy/inventory/inventory',
+			dest: '/ansible-deploy/' + args.environment + '/inventory',
 			replacements: [
 				{
 					name: 'host',
@@ -59,8 +59,8 @@ inquirer.prompt(environment).then(function(args) {
 			]
 		},
 		{
-			src: '/deploy/vars/deploy_vars.yml',
-			dest: '/ansible/deploy/vars/deploy_vars.yml',
+			src: '/ansible-deploy/vars/deploy_vars.yml',
+			dest: '/ansible-deploy/vars/deploy_vars.yml',
 			replacements: [
 				{
 					name: 'repository',
@@ -71,8 +71,8 @@ inquirer.prompt(environment).then(function(args) {
 			]
 		},
 		{
-			src: '/deploy/inventory/group_vars/all.yml',
-			dest: '/ansible/deploy/' + args.environment + '/group_vars/all.yml',
+			src: '/ansible-deploy/inventory/group_vars/all.yml',
+			dest: '/ansible-deploy/' + args.environment + '/group_vars/all.yml',
 			replacements: [
 				{
 					name: 'deploy_to',
@@ -89,13 +89,13 @@ inquirer.prompt(environment).then(function(args) {
 			]
 		},
 		{
-			src: '/deploy/deploy.yml',
-			dest: '/ansible/deploy/deploy.yml',
+			src: '/ansible-deploy/deploy.yml',
+			dest: '/ansible-deploy/deploy.yml',
 			replacements: []
 		},
 		{
-			src: '/deploy/rollback.yml',
-			dest: '/ansible/deploy/rollback.yml',
+			src: '/ansible-deploy/rollback.yml',
+			dest: '/ansible-deploy/rollback.yml',
 			replacements: []
 		},
 		{

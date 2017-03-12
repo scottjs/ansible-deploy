@@ -1,6 +1,6 @@
 ---
 - name: Deploy a new release
-  hosts: webservers
+  hosts: all
   vars_files:
     - vars/deploy_vars.yml
   roles:
