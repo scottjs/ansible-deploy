@@ -5,12 +5,18 @@ var cp = require('child_process');
 var fs = require('fs');
 
 // Setup paths
-var dest = './ansible/deploy';
+var dest = './ansible-deploy';
 
 // Load in required parameters and optional assigned parameters
 var args = process.argv.slice(2);
 var params = [];
 var total = 0;
+
+// Display help
+if(args[0] === 'help') {
+	console.log(chalk.underline.bold('Deploy help') + '\n\n  Deploy help.\n\n' + chalk.underline.bold('Usage') + '\n\n  $ npm run deploy\n  $ npm run deploy <' + chalk.underline('environment') + '>\n  $ npm run deploy <' + chalk.underline('environment') + '> [<' + chalk.underline('branch|tag') + '>] [vault=<' + chalk.underline('vault') + '>]\n\n' + chalk.underline.bold('Options') + '\n\n  <' + chalk.underline('branch|tag') + '>\t\tOverride the branch or release to deploy to the environment.\n  vault=<' + chalk.underline('vault') + '>\t\tPath to vault password file.\n');
+	process.exit();
+}
 
 // Start script
 console.log('Setting up a deploy...');
@@ -85,8 +91,8 @@ function setup(params) {
 	// Ansible args to use
 	var deployArgs = [
 		'-i',
-		'ansible/deploy/' + params['arg0'] + '/inventory',
-		'ansible/deploy/deploy.yml'
+		'ansible-deploy/' + params['arg0'] + '/inventory',
+		'ansible-deploy/deploy.yml'
 	];
 
 	// If vault params are sent, pass it into the ansible args
