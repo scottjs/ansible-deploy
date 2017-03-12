@@ -12,6 +12,12 @@ var args = process.argv.slice(2);
 var params = [];
 var total = 0;
 
+// Display help
+if(args[0] === 'help') {
+	console.log(chalk.underline.bold('Deploy help') + '\n\n  Deploy help.\n\n' + chalk.underline.bold('Usage') + '\n\n  $ npm run deploy\n  $ npm run deploy <' + chalk.underline('environment') + '>\n  $ npm run deploy <' + chalk.underline('environment') + '> [<' + chalk.underline('branch|tag') + '>] [vault=<' + chalk.underline('vault') + '>]\n\n' + chalk.underline.bold('Options') + '\n\n  <' + chalk.underline('branch|tag') + '>\t\tOverride the branch or release to deploy to the environment.\n  vault=<' + chalk.underline('vault') + '>\t\tPath to vault password file.\n');
+	process.exit();
+}
+
 // Start script
 console.log('Setting up a deploy...');
 
