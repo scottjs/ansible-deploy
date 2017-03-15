@@ -5,4 +5,4 @@
     - vars/deploy_vars.yml
   roles:
     - carlosbuenosvinos.ansistrano-deploy
-    - mail
+    - deploy-notify

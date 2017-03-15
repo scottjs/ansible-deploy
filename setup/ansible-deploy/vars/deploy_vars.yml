@@ -1,7 +1,7 @@
 ---
 # Notifiy users of deployment
 # notify_users: user@domain.com
-# smtp_from_address: user@domain.com
+# from_address: user@domain.com
 
 # Anistrano config
 ansistrano_allow_anonymous_stats: no
@@ -18,4 +18,4 @@ ansistrano_git_repo: $REPOSITORY$
 #  - { target: "./public/assets", archive: "assets.tar.gz" }
 
 # Deployment hooks
-ansistrano_after_update_code_tasks_file: "../node_modules/ansible-deploy/after-update-code.yml"
+ansistrano_after_update_code_tasks_file: "../node_modules/ansible-deploy/hooks/after-update-code.yml"
