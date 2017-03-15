@@ -14,6 +14,14 @@
   unarchive: src=../build/{{ item.archive }} dest="{{ ansistrano_release_path.stdout }}"
   with_items: "{{ build_files | default([]) }}"
 
+- name: Tar uploads
+  local_action: command tar -zcf ../build/uploads.tar.gz -C ../ {{ uploads_path }}
+  when: copy_uploads is defined and copy_uploads
+
+- name: Unarchive uploads on target server
+  unarchive: src=../build/uploads.tar.gz dest="{{ ansistrano_shared_path.stdout }}"
+  when: copy_uploads is defined and copy_uploads
+
 - name: Copy configs
   copy:
     dest="{{ ansistrano_release_path.stdout }}/.env"

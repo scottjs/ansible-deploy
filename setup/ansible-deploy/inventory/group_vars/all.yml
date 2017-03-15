@@ -29,6 +29,10 @@ ansistrano_git_branch: "$DEPLOY_FROM$"
 #   DB_USERNAME=
 #   DB_PASSWORD=
 
+# Copy contents of uploads directory
+# copy_uploads: false
+# uploads_path: "./public/wp-content/uploads"
+
 # Deployment email notification settings
 # smtp_host: smtp.domain.com
 # smtp_username: username
