@@ -3,6 +3,7 @@
   hosts: all
   vars_files:
     - vars/deploy_vars.yml
+
   roles:
     - carlosbuenosvinos.ansistrano-deploy
     - deploy-notify
