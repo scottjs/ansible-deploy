@@ -1,13 +1,13 @@
 {
   "name": "ansible-deploy",
-  "version": "1.14.0",
+  "version": "1.14.1",
   "description": "",
   "bin": {
 	"setup-deploy": "bin/setup.js",
 	"deploy": "bin/deploy.js"
   },
   "dependencies": {
-	"ansible-roles": "^2.1.2",
+	"ansible-roles": "^2.1.5",
 	"chalk": "^1.1.3",
 	"fs-extra": "^2.0.0",
 	"inquirer": "^3.0.4",

@@ -6,4 +6,4 @@
 
   roles:
     - carlosbuenosvinos.ansistrano-deploy
-    - deploy-notify
+    - notify

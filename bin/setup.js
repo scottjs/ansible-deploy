@@ -35,8 +35,8 @@ inquirer.prompt(environment).then(function(args) {
 				{
 					name: 'host',
 					type: 'input',
-					message: 'Server IP Address:',
-					default: '127.0.0.1'
+					message: 'Server IP or host:',
+					default: 'example.dev'
 				},
 				{
 					name: 'port',
