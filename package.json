@@ -1,6 +1,6 @@
 {
   "name": "ansible-deploy",
-  "version": "1.14.0",
+  "version": "1.14.1",
   "description": "",
   "bin": {
 	"setup-deploy": "bin/setup.js",
