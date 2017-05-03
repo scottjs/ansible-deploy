@@ -17,5 +17,9 @@ ansistrano_git_repo: $REPOSITORY$
 #  - { target: "./public/wp", archive: "wp.tar.gz" }
 #  - { target: "./public/assets", archive: "assets.tar.gz" }
 
+# Update permissions
+# file_permissions:
+#  - { path: "public/wp-content/uploads", owner: "apache", group: "apache" }
+
 # Deployment hooks
 ansistrano_after_update_code_tasks_file: "../node_modules/ansible-deploy/hooks/after-update-code.yml"

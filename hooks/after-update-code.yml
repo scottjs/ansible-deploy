@@ -28,3 +28,9 @@
     content="{{ env_config_file }}"
   no_log: true
   when: env_config_file is defined
+
+- name: Set folder permissions
+  become: yes
+  file: path={{ ansistrano_shared_path.stdout }}/{{ item.path }} owner="{{ item.owner }}" group="{{ item.group }}" recurse=yes
+  with_items: "{{ file_permissions | default([]) }}"
+  ignore_errors: true
